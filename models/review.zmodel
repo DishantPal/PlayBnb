@@ -1,0 +1,18 @@
+
+ import "./user.zmodel"  
+ import "./place.zmodel"  
+
+model Review {
+
+    id        String    @id @default(uuid())  
+    rating    Float?       
+    comment   String?      
+    userId    String?      
+    user      User?      @relation(fields: [userId], references: [id], name:"user")  
+    placeId   String?      
+    place     Place?     @relation(fields: [placeId], references: [id], name:"place")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

@@ -1,0 +1,20 @@
+
+ import "./user.zmodel"  
+ import "./booking.zmodel"  
+ import "./review.zmodel"  
+
+model Place {
+
+    id        String    @id @default(uuid())  
+    name      String      
+    description String?      
+    location  String?      
+    ownerId   String?      
+    owner     User?      @relation(fields: [ownerId], references: [id], name:"owner")  
+
+bookings  Booking[] @relation("place")  
+    reviews   Review[]  @relation("place")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}
